@@ -8,6 +8,10 @@ function startGame(){
    board.forEach(space => space.addEventListener('click', addMove));
 } 
 
+function clearGame(){
+  
+}
+
 function addMove(e) {
    let id = e.target.id;
    let s = document.getElementById(id);
@@ -74,6 +78,6 @@ function checkVertical(board){
 startGame();
 
 
-console.log(board);
-console.log(spaces);
+// console.log(board);
+// console.log(spaces);
 
