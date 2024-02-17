@@ -1,7 +1,7 @@
-let board = Array.from(document.getElementsByClassName("grid"));
+let board = Array.from(document.getElementsByClassName("grid")); // This creates an array of elements with the class name grid
 let currentPlayer = 'X';
 let spaces = Array(9).fill(null);
-let isGameOver = true; //boolean to break out of a loop until there is a winner, loser, or tie
+let isGameOver = false; //boolean to break out of a loop until there is a winner, loser, or tie
 let results = document.getElementById('results');
 
 function startGame(){
@@ -74,9 +74,11 @@ function checkVertical(board){
 // if there is no winner change the current player
 
 // event listener: 1. check boolean to see if its an X or O save that inside arr. 
-while(!isGameOver){
-  startGame();
-}
+// while(!isGameOver){
+//   startGame(); return
+// }
+
+startGame(); 
 
 
 
