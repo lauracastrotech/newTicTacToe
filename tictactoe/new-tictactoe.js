@@ -1,15 +1,18 @@
-let board = Array.from(document.getElementsByClassName("grid"));
-let currentPlayer = 'X';
-let spaces = Array(9).fill(null);
-let bool = true;
-let results = document.getElementById('results');
+let board = Array.from(document.getElementsByClassName("grid")); // This creates an array of 9 elements with the class name grid
+let currentPlayer = 'X'; // This initializes the first player to be X
+let spaces = Array(9).fill(null); // This creates an array of 9 elements that will store either X or O and each element position corrosponds with a position in the grid
+let isGameOver = false; //boolean to break out of a loop until there is a winner, loser, or tie
+let results = document.getElementById('results'); // This stores the text based on the result of the game
 
 function startGame(){
    board.forEach(space => space.addEventListener('click', addMove));
 } 
 
 function clearGame(){
-  
+  board[0] = null;
+  console.log('board arr', board);
+  console.log('spaces arr',spaces);
+  console.log('entered clearGame function');
 }
 
 function addMove(e) {
@@ -18,7 +21,6 @@ function addMove(e) {
    s.innerText = currentPlayer;
    board[id] = currentPlayer;
    currentPlayer = board[id] === 'X' ? 'O': 'X';
-   checkHorizontal(board);
  }
 
 function checkHorizontal(board){
@@ -26,9 +28,11 @@ function checkHorizontal(board){
       if(board[i] === board[i+1] && board[i] === board[i+2]){
        if(board[i] === 'O'){
          results.innerText = "Laura wins!";
+         clearGame()
          return true;
        } else{
          results.innerText = "Andrea wins!";
+         clearGame()
          return true;
        };
       }
@@ -74,8 +78,12 @@ function checkVertical(board){
 // if there is no winner change the current player
 
 // event listener: 1. check boolean to see if its an X or O save that inside arr. 
+// while(!isGameOver){
+//   startGame(); return
+// }
 
-startGame();
+startGame(); 
+
 
 
 // console.log(board);
