@@ -4,6 +4,7 @@ let spaces = Array(9).fill(null); // This creates an array of 9 elements that wi
 let isGameOver = false; //boolean to break out of a loop until there is a winner, loser, or tie
 let results = document.getElementById('results'); // This stores the text based on the result of the game
 
+// Function that keeps the game going! Not the best design. We're unable to end it. 
 function startGame(){
    board.forEach(space => space.addEventListener('click', addMove));
 } 
