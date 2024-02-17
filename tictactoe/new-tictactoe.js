@@ -4,6 +4,7 @@ let spaces = Array(9).fill(null);
 let bool = true;
 let results = document.getElementById('results');
 
+// Function that keeps the game going! Not the best design. We're unable to end it. 
 function startGame(){
    board.forEach(space => space.addEventListener('click', addMove));
 } 
