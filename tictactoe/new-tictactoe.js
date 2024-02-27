@@ -1,26 +1,25 @@
-let board = Array.from(document.getElementsByClassName("grid"));
+let spaces = Array.from(document.getElementsByClassName("grid"));
 let currentPlayer = 'X';
-let spaces = Array(9).fill(null);
+let board = [0,1,2,3,4,5,6,7,8];
 let bool = true;
 let results = document.getElementById('results');
 
-// Function that keeps the game going! Not the best design. We're unable to end it. 
 function startGame(){
-   board.forEach(space => space.addEventListener('click', addMove));
+  // console.log(spaces);
+  spaces.forEach((space) => space.addEventListener('click', addMove));
 } 
 
-function clearGame(){
-  
-}
-
 function addMove(e) {
-   let id = e.target.id;
+   let id = e.target.id; 
    let s = document.getElementById(id);
    s.innerText = currentPlayer;
    board[id] = currentPlayer;
    currentPlayer = board[id] === 'X' ? 'O': 'X';
-   checkHorizontal(board);
+   s.removeEventListener('click', addMove);
+  //  console.log("board after move: ", board);
+   checkForWinner(board);
  }
+
 
 function checkHorizontal(board){
    for(let i = 0; i < 9; i+=3){
@@ -32,8 +31,9 @@ function checkHorizontal(board){
          results.innerText = "Andrea wins!";
          return true;
        };
-      }
+    }
    }
+   return false;
  }
 
 function checkVertical(board){
@@ -48,25 +48,43 @@ function checkVertical(board){
        };
       }
    }
+   return false;
 }
  
  function checkDiagonal(board){
    if(board[0] === board[4] && board[0] === board[8] || board[2] === board[4] && board[2] === board[6]){
      if(board[0] === 'O' || board [2] === 'O'){
       results.innerText = "Laura wins!";
-       return true;
-     } else{
+      return true;
+    } else {
       results.innerText = "Andrea wins!";
-       return true;
-     }
-   }
+      return true;
+    }
+  }
+  return false;
  }
  
  function checkForWinner(board){
-     if(checkHorizontal(board) || checkVertical(board) || checkDiagonal(board)){
-       return true;
-     };
-}
+    if(checkHorizontal(board) || checkVertical(board) || checkDiagonal(board)){
+      console.log("awu");
+      spaces.forEach((space) => space.removeEventListener('click', addMove)); 
+      return true;
+    }
+    return false;
+  }
+
+
+
+// function removeEvents(board){
+//   for (let i = 0; i < board.lenght; i++){
+//     if (typeof board[i] !== 'string'){
+//       console.log("in");
+//       let space = document.getElementById(i);
+//       space.removeEventListener('click', addMove);
+//     }
+//   }
+//   return;
+// }
 // check for winner function
 // clear game
 // while something is true, call startGame function
