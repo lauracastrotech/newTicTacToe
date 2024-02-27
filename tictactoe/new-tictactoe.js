@@ -9,15 +9,24 @@ function startGame(){
   spaces.forEach((space) => space.addEventListener('click', addMove));
 } 
 
+function clearGame(){
+  board[0] = null;
+  console.log('board arr', board);
+  console.log('spaces arr',spaces);
+  console.log('entered clearGame function');
+}
+
 function addMove(e) {
    let id = e.target.id; 
    let s = document.getElementById(id);
    s.innerText = currentPlayer;
    board[id] = currentPlayer;
    currentPlayer = board[id] === 'X' ? 'O': 'X';
+
    s.removeEventListener('click', addMove);
   //  console.log("board after move: ", board);
    checkForWinner(board);
+
  }
 
 
@@ -26,9 +35,11 @@ function checkHorizontal(board){
       if(board[i] === board[i+1] && board[i] === board[i+2]){
        if(board[i] === 'O'){
          results.innerText = "Laura wins!";
+         clearGame()
          return true;
        } else{
          results.innerText = "Andrea wins!";
+         clearGame()
          return true;
        };
     }
@@ -93,8 +104,12 @@ function checkVertical(board){
 // if there is no winner change the current player
 
 // event listener: 1. check boolean to see if its an X or O save that inside arr. 
+// while(!isGameOver){
+//   startGame(); return
+// }
 
-startGame();
+startGame(); 
+
 
 
 // console.log(board);
